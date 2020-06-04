@@ -1,13 +1,18 @@
 html{
     font-family: Eina01,sans-serif;
 }
+body, .container-fluid{
+    padding: 0;
+}
 a {
     color: #14213D;
 }
 
 .navbar {
-    background-color: #DF928E;
+    background-color: white;
     color: #14213d;
+    border-radius: 0;
+    margin: 0 !important;
 }
 .navbar-toggle{
     color: #14213d;
@@ -31,17 +36,17 @@ a {
 .navbar-right {
     float: right!important;
     margin-right: -15px;
-}
+}}
 .navbar .btn {
     padding: 8px;
     font-size: 14px;
     line-height: 1;
     float: right;
     background-color: #14213D;
-    color: #DF928E;
+    color: white;
     box-shadow: 0 0.2rem 0.5rem rgba(103, 110, 144, .2), 0 0 0 0.1rem rgba(103, 110, 144, .05);
 }
 
 .navbar .btn a{
-    color: #DF928E;
+    color: white;
 }
