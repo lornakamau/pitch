@@ -1,4 +1,4 @@
-from flask import render_template,abort
+from flask import render_template,abort,redirect,url_for,request
 from . import main
 from ..models import User
 from .forms import UpdateProfile
@@ -18,8 +18,16 @@ def categories():
     '''
     View page function that returns the categories page and its data
     '''
-    title = 'Categories'
+    title = 'Categories | Pitch'
     return render_template('categories.html', title=title)
+
+@main.route('/about')
+def about():
+    '''
+    View page function that returns the about page and its data
+    '''
+    title = 'About | Pitch'
+    return render_template('about.html', title=title)
 
 @main.route('/user/<uname>')
 def profile(uname):

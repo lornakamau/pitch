@@ -32,6 +32,9 @@ a {
     flex-wrap: wrap;
     justify-items: center;
 }
+h1,h2,h3,h4 {
+    font-family: 'Fredoka One', cursive;
+}
 @media (min-width: 768px){
 .navbar .btn {
     padding: 8px;
