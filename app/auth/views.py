@@ -3,7 +3,7 @@ from . import auth
 from ..models import User
 from .forms import SignUpForm, LoginForm
 from .. import db
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required
 
 @auth.route('/signup', methods = ["GET", "POST"])
 def signup():
@@ -28,3 +28,9 @@ def login():
     
     title = "Login"
     return render_template('auth/login.html', login_form = form, title=title)
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("main.index"))
