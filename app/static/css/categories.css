@@ -1,0 +1,11 @@
+.row{
+    margin: 5%;
+}
+.jumbotron{
+    vertical-align: middle;
+    background-color: #5bb3bf;
+    border-radius: 10px;
+}
+.card{
+    margin: 3%;
+}
