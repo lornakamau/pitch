@@ -5,6 +5,7 @@ from .forms import SignUpForm, LoginForm
 from .. import db
 from flask_login import login_user, logout_user, login_required
 
+# app.config['SECRET_KEY'] =''
 @auth.route('/signup', methods = ["GET", "POST"])
 def signup():
     form = SignUpForm()

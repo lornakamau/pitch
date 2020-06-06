@@ -1,13 +1,14 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,SubmitField,ValidationError,BooleanField
-from wtforms.validators import Required,Email,EqualTo
+from wtforms.validators import Required,Email,EqualTo,Length
 from ..models import User
+from email_validator import validate_email, EmailNotValidError
 
 class SignUpForm(FlaskForm):
     email = StringField('Your Email Address',validators=[Required(),Email()])
-    username = StringField('Enter your username',validators = [Required()])
-    password = PasswordField('Password',validators = [Required(), EqualTo('password_confirm',message = 'Passwords must match')])
-    password_confirm = PasswordField('Confirm Passwords',validators = [Required()])
+    username = StringField('Enter your username',validators = [Required(),Length(min=2,max=20)])
+    password = PasswordField('Password',validators = [Required()])
+    password_confirm = PasswordField('Confirm Passwords',validators = [Required(), EqualTo('password',message = 'Passwords must match')])
     submit = SubmitField('Sign Up')
 
     def validate_email(self,data_field):
@@ -21,5 +22,5 @@ class SignUpForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = StringField('Your Email Address',validators=[Required(),Email()])
     password = PasswordField('Password',validators =[Required()])
-    remember = BooleanField('Remember me') #confirms if user wants to be logged out after session
+    remember = BooleanField('Remember Me') #confirms if user wants to be logged out after session
     submit = SubmitField('Sign In')
