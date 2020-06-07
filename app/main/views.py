@@ -18,8 +18,32 @@ def twitter():
     '''
     View page function that returns the categories page and its data
     '''
-    title = 'Categories | Pitch'
-    return render_template('twitter.html', title=title)
+    title = 'Categories | Twitter'
+    return render_template('categories/twitter.html', title=title)
+
+@main.route('/categories/elevator-pitch')
+def elevator():
+    '''
+    View page function that returns the categories page and its data
+    '''
+    title = 'Categories | Elevator'
+    return render_template('categories/elevator.html', title=title)
+
+@main.route('/categories/competitor-pitch')
+def competitor():
+    '''
+    View page function that returns the categories page and its data
+    '''
+    title = 'Categories | Competitor'
+    return render_template('categories/competitor.html', title=title)
+
+@main.route('/categories/investor-pitch')
+def investor():
+    '''
+    View page function that returns the categories page and its data
+    '''
+    title = 'Categories | Investor'
+    return render_template('categories/investor.html', title=title)
 
 @main.route('/about')
 def about():
