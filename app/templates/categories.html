@@ -5,58 +5,61 @@
 {% endblock %}
 {% block content %}
 <div class="row">
-    <!--Flash message -->
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-success">
+  <!--Flash message -->
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     {{ message }}
-    </div>
+  </div>
   {% endfor %}
-    <div class="col-md-6">
-        {% if pitches %}
-        {% for pitch in pitches %}
-        <div class="jumbotron">
-            <h2 class="text-center">{{category.category_name}}</h2>
-            {% for pitch in pitches %}
-            <div class="card">
-                <div class="card-body">
-                    <!-- <img class="rounded-circle" src="{{url_for('static', filename='photos/'+ pitch.pitcher.profile_pic_path)}}"> -->
-                    <blockquote class="blockquote mb-0">
-                        <p>{{pitch.pitch_content}}</p>
-                        <footer class="blockquote-footer"><cite title="Source Title">{{pitch.pitcher.username}}</cite></footer>
-                        <a href="/comment/{{pitch.id}}">Comment</a>
-                        <small style="float: right;" style="cursor: pointer !important" onclick="toggleDetails(pitch)">See Details</small>
-                    </blockquote>
-                </div>
-                <div class="card-footer text-muted" id="details">
-                    <small>Submitted on {{pitch.posted.strftime('%Y-%m-%d')}}</small><br>
-                    <div id="downVote" style="display: inline">0</div>;&nbsp;&nbsp;<i class="fas fa-thumbs-down vote" onclick="downVote()"></i>&nbsp;&nbsp;
-                    <div id="upVote" style="display: inline">0</div>&nbsp;&nbsp;<i onclick="upVote()" class="fas fa-thumbs-up vote"></i>&nbsp;&nbsp;
-                  </div>
-            </div>
-            {% if comments %}
-            {% for comment in comments %}
-                <div class="card">
-                  <div class="card-body">
-                    <div class="language">{{comment.author.username}}</div>
-                    <p class="card-text">{{comment.comment_content}}</p>
-                    <br>
-                  </div>
-                </div>
-            {% endfor%}
-            {%else%}
-            <h3>This pitch has no comments</h3>
-            {% endif %}
-            {% endfor%}
+  <div class="col-md-6">
+    <h2 class="text-center">{{category_name}} Pitches</h2>
+    {% if pitches %}
+    <div class="jumbotron">
+      {% for pitch in pitches %}
+        <div class="card">
+          <div class="card-body">
+            <!-- <img class="rounded-circle" src="{{url_for('static', filename='photos/'+ pitch.pitcher.profile_pic_path)}}"> -->
+            <blockquote class="blockquote mb-0">
+              <p>{{pitch.pitch_content}}</p>
+              <footer class="blockquote-footer"><cite title="Source Title">{{pitch.pitcher.username}}</cite></footer>
+              <small style="float: right;" style="cursor: pointer !important"><a href="/comment/{{pitch.id}}">Comment</a></small>
+            </blockquote>
+          </div>
+          <div class="card-footer text-muted" id="details">
+            <small>Submitted on {{pitch.posted.strftime('%Y-%m-%d')}}</small><br>
+            <div id="downVote" style="display: inline">0</div>;&nbsp;&nbsp;<i class="fas fa-thumbs-down vote"
+              onclick="downVote()"></i>&nbsp;&nbsp;
+            <div id="upVote" style="display: inline">0</div>&nbsp;&nbsp;<i onclick="upVote()"
+              class="fas fa-thumbs-up vote"></i>&nbsp;&nbsp;
+          </div>
         </div>
-        {%endfor%}
-        {%else%}
-        <p id="nothing">There are no pitches in this category</p>
-        <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">New Pitch</a>
-        {%endif%}
-    </div>
-    <div class="col-md-6">
         
+          {% for comment in comments %}
+            {%if comment.pitch_id == pitch.id %}
+            <div class="card">
+              <div class="card-body">
+                <div class="language">{{comment.author.username}}</div>
+                <p class="card-text">{{comment.comment_content}}</p>
+                <br>
+              </div>
+            </div>
+            {%else%}
+              <h4>This pitch has no comments</h4>
+              <a href="/comment/{{pitch.id}}">Comment</a>
+            {% endif %}
+          {% endfor%}
+
+          
+          {% endfor%}
     </div>
+    {%else%}
+    <p id="nothing">There are no pitches in this category</p>
+    <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">New Pitch</a>
+    {%endif%}
+  </div>
+  <div class="col-md-6">
+
+  </div>
 </div>
 {% endblock %}

@@ -37,6 +37,25 @@
     </form>
       {% endif %}
   </div>
+  <div class="col-md-4">
+    {% if pitches%}
+    <div id='card' class="">
+      {% for pitch in pitches %}
+
+      <div class="card ">
+          <div class="mx-auto card-body">
+              <h3 class="card-title">{{pitch.title}}</h3>
+              <h6 class="card-subtitle mb-2 text-muted">Submitted on :{{pitch.posted}}</h6>
+              <p class="card-text">Pitch: {{pitch.pitch_content}}</p>
+          </div>
+
+      </div>
+      {% endfor %}
+  </div>
+    {%else%}
+    <p>You have no pitches</p>
+    {%endif%}
+  </div>
 </div>
 </div>
 {% endblock %}

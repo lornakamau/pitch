@@ -20,8 +20,11 @@ def pitches_by_category(category_id):
     View pitches page function that displays the picthes available
     '''
     pitches = Pitch.get_category_pitch(category_id)
+    category = Category.query.filter_by(id = category_id).first()
+    category_name = category.category_name
     categories = Category.query.all()
-    return render_template('categories.html', pitches = pitches, categories=categories)
+    comments = Comment.query.all()
+    return render_template('categories.html', pitches = pitches, categories=categories, category_name=category_name, comments=comments)
 
 @main.route('/about')
 def about():
@@ -39,8 +42,8 @@ def profile(uname):
 
     if user is None:
         abort(404)
-
-    return render_template("profile/profile.html", user = user, categories=categories)
+    pitches = Pitch.get_user_pitch(user.id)
+    return render_template("profile/profile.html", user = user, categories=categories, pitches=pitches)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -80,28 +83,31 @@ def new_pitch():
     form = PitchForm()
     categories = Category.query.all()
     if form.validate_on_submit():
-        pitch = Pitch(pitch_content=form.pitch_content.data, pitcher=current_user)
+        category_id=(Category.get_category_name(form.category.data))
+        pitch = Pitch(pitch_content=form.pitch_content.data, pitcher=current_user, title=form.title.data, category_id=(Category.get_category_name(form.category.data)), upvotes= 0, downvotes=0)
         db.session.add(pitch)
         db.session.commit()
         flash('Your pitch has been posted!', 'success')
-        return redirect(url_for('main.twitter'))
+        return redirect(url_for("main.index"))
+        # return redirect(url_for('main.pitches_by_category', category_id = category.id))
 
     return render_template('create_pitch.html',title=title, pitch_form=form, categories=categories)
 
-@main.route("/comment/<int:id>", methods=['GET', 'POST'])
+@main.route("/comment/<int:pitch_id>", methods=['GET', 'POST'])
 @login_required
-def new_comment(id):
+def new_comment(pitch_id):
     title = 'New Comment'
     form = CommentForm()
     categories = Category.query.all()
+    pitch = Pitch.query.filter_by(id = pitch_id).first()
     if form.validate_on_submit():
-        comment = Comment(comment_content=form.comment_content.data, author=current_user)
+        comment = Comment(comment_content=form.comment_content.data, author=current_user, pitch_id=pitch_id)
         db.session.add(comment)
         db.session.commit()
         flash('Your comment has been added!', 'success')
-        return redirect(url_for('main.twitter', id=id))
+        return redirect(url_for('main.index'))
 
-    return render_template('add_comment.html', title=title, comment_form=form, categories=categories )
+    return render_template('add_comment.html', title=title, comment_form=form, categories=categories, pitch=pitch)
 
 # @main.route('/categories/twitter-pitch')
 # def twitter():

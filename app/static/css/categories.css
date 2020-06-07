@@ -19,9 +19,9 @@ blockquote{
 blockquote footer:before, blockquote small:before {
     content: none;
 }
-#details{
+/* #details{
     display: none;
-}
+} */
 .fas{
     font-size: 2rem;
 }
