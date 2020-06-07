@@ -5,17 +5,29 @@
 {% endblock %}
 {% block content %}
 <div class="row">
+    <!--Flash message -->
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ message }}
+    </div>
+  {% endfor %}
     <div class="col-md-6">
         <div class="jumbotron">
             <h2 class="text-center">Twitter Pitches</h2>
             <div class="card">
-
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
                         <p>A healthy snack food category disrupter, Hummus 2.0</p>
-                        <footer class="blockquote-footer">SourceTitle</footer>
+                        <footer class="blockquote-footer"><cite title="Source Title">SourceTitle</cite></footer>
+                        <small style="float: right;" style="cursor: pointer !important" onclick="toggleDetails()">See Details</small>
                     </blockquote>
                 </div>
+                <div class="card-footer text-muted" id="details">
+                    <small>Submitted by &nbsp;&nbsp;<b style=color:black>submitter</b> &nbsp;&nbsp;on days</small><br>
+                    <div id="downVote" style="display: inline">0</div>;&nbsp;&nbsp;<i class="fas fa-thumbs-down vote" onclick="downVote()"></i>&nbsp;&nbsp;
+                    <div id="upVote" style="display: inline">0</div>&nbsp;&nbsp;<i onclick="upVote()" class="fas fa-thumbs-up vote"></i>&nbsp;&nbsp;
+                  </div>
             </div>
             <div class="card">
 
@@ -47,74 +59,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="jumbotron">
-            <h2 class="text-center">Elevator Pitches</h2>
-            <div class="card">
-
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>Ranchers are often frustrated by the effort it takes to hand-shear their angora alpacas. DroneClip eliminates the need to chase, restrain, and trim these beautiful beasts. For over 5 years, alpaca farmers have trusted DroneClip to provide the best solutions in alpaca ranching. With our safe and reliable drone aircraft, you can spend less time shearing and manage a larger herd. I’ll give you a call to learn more about your situation. Thanks for your time.</p>
-                        <footer class="blockquote-footer">SourceTitle</footer>
-                    </blockquote>
-                </div>
-            </div>
-            <div class="card">
-
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>“Do you hate shearing stubborn alpacas by hand? I’m Joe Neely from DroneClip. I enjoy connecting animal lovers to technologies like our DroneScoop waste solution. I’m here at the Alpaca Festival to learn from you, the experts. Our hands-free DroneClip shearing system outperforms hand-shears so you can limit your employee hours. We saved one rancher, Bob Mikabob, over 40 weekly work-hours. When can I visit your farm, demonstrate our product, and meet your neighbors?”</p>
-                        <footer class="blockquote-footer">SourceTitle</footer>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="jumbotron">
-            <h2 class="text-center">Competitor Pitches</h2>
-            <div class="card">
-
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <footer class="blockquote-footer">SourceTitle</footer>
-                    </blockquote>
-                </div>
-            </div>
-            <div class="card">
-
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <footer class="blockquote-footer">SourceTitle</footer>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="jumbotron">
-            <div class="card">
-
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <footer class="blockquote-footer">SourceTitle</footer>
-                    </blockquote>
-                </div>
-            </div>
-            <div class="card">
-
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <footer class="blockquote-footer">SourceTitle</footer>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
+        <a href="{{ url_for('main.new_pitch')}}">New Pitch</a>
     </div>
 </div>
 {% endblock %}

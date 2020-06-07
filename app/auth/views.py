@@ -17,7 +17,7 @@ def signup():
         mail_message("Welcome to Pitch","email/welcome_user",user.email,user=user)
 
         return redirect(url_for('auth.login'))
-    title = "New Account"
+    title = "New Account | Pitch"
     return render_template('auth/signup.html', signup_form = form, title=title)
 
 @auth.route('/login', methods = ["GET", "POST"])
@@ -30,7 +30,7 @@ def login():
             return redirect(request.args.get('next') or url_for('main.index'))
         flash('Invalid username or password', 'danger')
     
-    title = "Login"
+    title = "Login | Pitch"
     return render_template('auth/login.html', login_form = form, title=title)
 
 @auth.route('/logout')

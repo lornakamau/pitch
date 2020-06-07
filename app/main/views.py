@@ -1,7 +1,7 @@
-from flask import render_template,abort,redirect,url_for,request
+from flask import render_template,abort,redirect,url_for,request,flash
 from . import main
-from ..models import User
-from .forms import UpdateProfile
+from ..models import User, Pitch
+from .forms import UpdateProfile, PitchForm
 from .. import db,photos
 from flask_login import login_required
 
@@ -91,3 +91,16 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/new-pitch', methods=['GET', 'POST'])
+@login_required
+def new_pitch():
+    title = 'New Pitch'
+    form = PitchForm()
+    if form.validate_on_submit():
+
+        flash('Your pitch has been posted!', 'success')
+        return redirect(url_for('main.twitter'))
+
+    return render_template('create_pitch.html',title=title, pitch_form=form)
+

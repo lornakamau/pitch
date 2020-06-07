@@ -51,7 +51,7 @@ h1,h2,h3,h4 {
     box-shadow: 0 0.2rem 0.5rem rgba(103, 110, 144, .2), 0 0 0 0.1rem rgba(103, 110, 144, .05);
 }
 }
-@media (max-width: 768px){
+@media (max-width: 767px){
     .navbar .btn {
         margin: 0 !important;
     }

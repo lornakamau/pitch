@@ -38,6 +38,15 @@ class Comment(db.Model):
     comment_wording = db.Column(db.String(255))
     author_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
+    def save_comment(self):
+            db.session.add(self)
+            db.session.commit()
+
+    @classmethod
+    def get_comments(cls,id):
+            comments = Comment.query.filter_by(post_id=id).all()
+            return comments
+                
     def __repr__(self):
         return f'COMMENT {self.comment_wording}'
 
