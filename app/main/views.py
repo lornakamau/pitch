@@ -1,7 +1,7 @@
 from flask import render_template,abort,redirect,url_for,request,flash
 from . import main
-from ..models import User, Pitch
-from .forms import UpdateProfile, PitchForm
+from ..models import User, Pitch, Comment
+from .forms import UpdateProfile, PitchForm, CommentForm
 from .. import db,photos
 from flask_login import login_required, current_user
 
@@ -106,4 +106,17 @@ def new_pitch():
         return redirect(url_for('main.twitter'))
 
     return render_template('create_pitch.html',title=title, pitch_form=form)
+
+@main.route("/comment/<int:pitch_id>")
+def comment(pitch_id):
+    title = 'New Comment'
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(comment_content=form.comment_content.data, author=current_user)
+        db.session.add(comment)
+        db.session.commit()
+        flash('Your comment has been added!', 'success')
+        return redirect(url_for('main.twitter'))
+
+    return render_template('add_comment.html', title=title, comment_form=form )
 
