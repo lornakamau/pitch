@@ -13,13 +13,13 @@ def index():
     title = 'Pitch'
     return render_template('index.html', title=title)
 
-@main.route('/categories')
-def categories():
+@main.route('/categories/twitter-pitch')
+def twitter():
     '''
     View page function that returns the categories page and its data
     '''
     title = 'Categories | Pitch'
-    return render_template('categories.html', title=title)
+    return render_template('twitter.html', title=title)
 
 @main.route('/about')
 def about():
