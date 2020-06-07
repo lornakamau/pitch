@@ -45,7 +45,7 @@
       <div class="card ">
           <div class="mx-auto card-body">
               <h3 class="card-title">{{pitch.title}}</h3>
-              <h6 class="card-subtitle mb-2 text-muted">Submitted on :{{pitch.posted}}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Submitted on :{{pitch.posted.strftime('%Y-%m-%d')}}</h6>
               <p class="card-text">Pitch: {{pitch.pitch_content}}</p>
           </div>
 

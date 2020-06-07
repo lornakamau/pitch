@@ -109,37 +109,25 @@ def new_comment(pitch_id):
 
     return render_template('add_comment.html', title=title, comment_form=form, categories=categories, pitch=pitch)
 
-# @main.route('/categories/twitter-pitch')
-# def twitter():
-#     '''
-#     View page function that returns the categories page and its data
-#     '''
-#     title = 'Categories | Twitter'
-#     pitches = Pitch.query.all()
-#     comments = Comment.query.all()
-#     return render_template('categories/twitter.html', title=title, pitches=pitches,comments=comments)
+@main.route('/upvote_pitch/<pitch_id>')
+def upvote (pitch_id):
+    pitch = Pitch.query.filter_by(id = pitch_id).first()
 
-# @main.route('/categories/elevator-pitch')
-# def elevator():
-#     '''
-#     View page function that returns the categories page and its data
-#     '''
-#     title = 'Categories | Elevator'
-#     return render_template('categories/elevator.html', title=title)
+    counted_upvotes = pitch.upvotes + 1
 
-# @main.route('/categories/competitor-pitch')
-# def competitor():
-#     '''
-#     View page function that returns the categories page and its data
-#     '''
-#     title = 'Categories | Competitor'
-#     return render_template('categories/competitor.html', title=title)
+    pitch.upvotes = counted_upvotes
+    db.session.commit()
 
-# @main.route('/categories/investor-pitch')
-# def investor():
-#     '''
-#     View page function that returns the categories page and its data
-#     '''
-#     title = 'Categories | Investor'
-#     return render_template('categories/investor.html', title=title)
+    return redirect(url_for('main.pitches_by_category', category_id = pitch.category_id))
 
+@main.route('/downvote_pitch/<pitch_id>')
+def downvote (pitch_id):
+    pitch = Pitch.query.filter_by(id = pitch_id).first()
+
+
+    counted_downvotes = pitch.downvotes + 1
+
+    pitch.downvotes = counted_downvotes
+    db.session.commit()
+
+    return redirect(url_for('main.pitches_by_category', category_id = pitch.category_id))

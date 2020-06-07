@@ -28,10 +28,8 @@
           </div>
           <div class="card-footer text-muted" id="details">
             <small>Submitted on {{pitch.posted.strftime('%Y-%m-%d')}}</small><br>
-            <div id="downVote" style="display: inline">0</div>;&nbsp;&nbsp;<i class="fas fa-thumbs-down vote"
-              onclick="downVote()"></i>&nbsp;&nbsp;
-            <div id="upVote" style="display: inline">0</div>&nbsp;&nbsp;<i onclick="upVote()"
-              class="fas fa-thumbs-up vote"></i>&nbsp;&nbsp;
+            <button class="btn"><a href="{{url_for('main.upvote', uname = current_user.id ,pitch_id = pitch.id)}}">{{pitch.upvotes}}<i class="fas fa-thumbs-up"></i>&nbsp;like</a></button>&nbsp;&nbsp;
+            <button class="btn"><a href="{{url_for('main.downvote', uname = current_user.id ,pitch_id = pitch.id)}}">{{pitch.downvotes}}<i class="fas fa-thumbs-up"></i>&nbsp;dislike</a></button>&nbsp;&nbsp;
           </div>
         </div>
         
@@ -49,8 +47,6 @@
               <a href="/comment/{{pitch.id}}">Comment</a>
             {% endif %}
           {% endfor%}
-
-          
           {% endfor%}
     </div>
     {%else%}
