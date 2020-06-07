@@ -27,10 +27,9 @@
                     <li><a href="/about">About</a></li>
                     <li><a  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">Categories</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{url_for('main.twitter')}}">Twitter Pitches</a><br>
-                            <a class="dropdown-item" href="{{url_for('main.elevator')}}">Elevator Pitches</a><br>
-                            <a class="dropdown-item" href="{{url_for('main.competitor')}}">Competitor Pitches</a><br>
-                            <a class="dropdown-item" href="{{url_for('main.investor')}}">Investor Pitches</a><br>
+                            {% for category in categories %}
+                            <a class="dropdown-item" href="{{url_for('main.pitches_by_category', category_id = category.id)}}">{{category.category_name}} Pitches</a><br>
+                            {% endfor%}
                         </div>
                     </li>
                 </ul>
