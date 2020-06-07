@@ -15,7 +15,7 @@
     <div class="col-md-6">
         <div class="jumbotron">
             <h2 class="text-center">Twitter Pitches</h2>
-            <div class="card">
+            <!-- <div class="card">
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
                         <p>A healthy snack food category disrupter, Hummus 2.0</p>
@@ -55,7 +55,24 @@
                         <footer class="blockquote-footer">SourceTitle</footer>
                     </blockquote>
                 </div>
+            </div> -->
+            {% for pitch in pitches %}
+            <div class="card">
+                <div class="card-body">
+                    <!-- <img class="rounded-circle" src="{{url_for('static', filename='photos/'+ pitch.pitcher.profile_pic_path)}}"> -->
+                    <blockquote class="blockquote mb-0">
+                        <p>{{pitch.pitch_content}}</p>
+                        <footer class="blockquote-footer"><cite title="Source Title">{{pitch.pitcher.username}}</cite></footer>
+                        <small style="float: right;" style="cursor: pointer !important" onclick="toggleDetails(pitch)">See Details</small>
+                    </blockquote>
+                </div>
+                <div class="card-footer text-muted" id="details">
+                    <small>Submitted on {{pitch.posted.strftime('%Y-%m-%d')}}</small><br>
+                    <div id="downVote" style="display: inline">0</div>;&nbsp;&nbsp;<i class="fas fa-thumbs-down vote" onclick="downVote()"></i>&nbsp;&nbsp;
+                    <div id="upVote" style="display: inline">0</div>&nbsp;&nbsp;<i onclick="upVote()" class="fas fa-thumbs-up vote"></i>&nbsp;&nbsp;
+                  </div>
             </div>
+            {% endfor%}
         </div>
     </div>
     <div class="col-md-6">

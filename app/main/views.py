@@ -3,7 +3,7 @@ from . import main
 from ..models import User, Pitch
 from .forms import UpdateProfile, PitchForm
 from .. import db,photos
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 @main.route('/')
 def index():
@@ -19,7 +19,8 @@ def twitter():
     View page function that returns the categories page and its data
     '''
     title = 'Categories | Twitter'
-    return render_template('categories/twitter.html', title=title)
+    pitches = Pitch.query.all()
+    return render_template('categories/twitter.html', title=title, pitches=pitches)
 
 @main.route('/categories/elevator-pitch')
 def elevator():
@@ -98,7 +99,9 @@ def new_pitch():
     title = 'New Pitch'
     form = PitchForm()
     if form.validate_on_submit():
-
+        pitch = Pitch(pitch_content=form.pitch_content.data, pitcher=current_user)
+        db.session.add(pitch)
+        db.session.commit()
         flash('Your pitch has been posted!', 'success')
         return redirect(url_for('main.twitter'))
 

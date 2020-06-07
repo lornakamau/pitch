@@ -1,4 +1,4 @@
-function toggleDetails(){
+function toggleDetails(index){
     $("#details").toggle();
   }
 var upVoteNumber = 0;
