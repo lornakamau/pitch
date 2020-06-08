@@ -26,7 +26,7 @@
     {% if pitches %}
     <p>Below are examples to inspire you. Vote and comment on whichever captures your attention.</p>
     {%endif%}
-    {%elif category_name == "Competitor"%}
+    {%elif category_name == "Competition"%}
     <h4 class="text-center">What is a Competition Pitch?</h4>
     <p class="card-text">This is longer than Elevator and Twitter pitches. It needs to be presented with a pitch deck. The deck you will be building is very similar to the one you would use to send to investors. The pressure is high and you have a limited amount of time to catch everyone’s attention. You need to make the most out of it.</p>
     {% if pitches %}
@@ -82,8 +82,10 @@
       </div>
       {% endfor%}
     {%else%}
-    <p id="nothing">There are no pitches in this category</p>
-    <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">New Pitch</a>
+    <div id="nothing">
+    <p>There are no pitches in this category</p>
+    <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">Add a Pitch</a>
+    </div>
     {%endif%}
   </div>
   <div class="col-md-2"></div>
