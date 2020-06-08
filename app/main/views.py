@@ -29,14 +29,15 @@ def pitches_by_category(category_id):
     return render_template('categories.html', pitches = pitches, categories=categories, category_name=category_name, comments=comments, title=title)
 
 @main.route('/user/<uname>')
+@login_required
 def profile(uname):
     categories = Category.query.all()
     user = User.query.filter_by(username = uname).first()
-
+    title = current_user.username + " | Pitch"
     if user is None:
         abort(404)
     pitches = Pitch.get_user_pitch(user.id)
-    return render_template("profile/profile.html", user = user, categories=categories, pitches=pitches)
+    return render_template("profile/profile.html", user = user, categories=categories, pitches=pitches, title=title)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
