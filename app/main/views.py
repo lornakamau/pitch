@@ -17,7 +17,7 @@ def index():
 @main.route('/pitches/<category_id>')
 def pitches_by_category(category_id):
     '''
-    View pitches page function that displays the picthes available
+    View pitches page function that displays the pitches available
     '''
     
     pitches = Pitch.get_category_pitch(category_id)

@@ -86,17 +86,17 @@ class Pitch(db.Model):
 
         @classmethod
         def get_user_pitch(cls,id):
-                user_pitches = Pitch.query.filter_by(pitcher_id = id).all()
+                user_pitches = Pitch.query.filter_by(pitcher_id = id).order_by(Pitch.posted.desc())
                 return user_pitches
 
         @classmethod
         def get_category_pitch(cls,id):
-                category_pitches = Pitch.query.filter_by(category_id = id).all()
+                category_pitches = Pitch.query.filter_by(category_id = id).order_by(Pitch.posted.desc())
                 return category_pitches
 
         @classmethod
         def get_pitch_id(cls,id):
-                pitch_id = Pitch.query.filter_by(id = id).all()
+                pitch_id = Pitch.query.filter_by(id = id).order_by(Pitch.id.desc()) 
                 return pitch_id
 
 
