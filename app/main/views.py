@@ -19,21 +19,14 @@ def pitches_by_category(category_id):
     '''
     View pitches page function that displays the picthes available
     '''
+    
     pitches = Pitch.get_category_pitch(category_id)
     category = Category.query.filter_by(id = category_id).first()
     category_name = category.category_name
     categories = Category.query.all()
     comments = Comment.query.all()
-    return render_template('categories.html', pitches = pitches, categories=categories, category_name=category_name, comments=comments)
-
-@main.route('/about')
-def about():
-    '''
-    View page function that returns the about page and its data
-    '''
-    title = 'About | Pitch'
-    categories = Category.query.all()
-    return render_template('about.html', title=title, categories=categories)
+    title=category_name + " | Pitch"
+    return render_template('categories.html', pitches = pitches, categories=categories, category_name=category_name, comments=comments, title=title)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -79,7 +72,7 @@ def update_pic(uname):
 @main.route('/new-pitch', methods=['GET', 'POST'])
 @login_required
 def new_pitch():
-    title = 'New Pitch'
+    title = 'New Pitch | Pitch'
     form = PitchForm()
     categories = Category.query.all()
     if form.validate_on_submit():
@@ -88,15 +81,14 @@ def new_pitch():
         db.session.add(pitch)
         db.session.commit()
         flash('Your pitch has been posted!', 'success')
-        return redirect(url_for("main.index"))
-        # return redirect(url_for('main.pitches_by_category', category_id = category.id))
+        return redirect(url_for('main.pitches_by_category', category_id = category_id))
 
     return render_template('create_pitch.html',title=title, pitch_form=form, categories=categories)
 
 @main.route("/comment/<int:pitch_id>", methods=['GET', 'POST'])
 @login_required
 def new_comment(pitch_id):
-    title = 'New Comment'
+    title = 'New Comment | Pitch'
     form = CommentForm()
     categories = Category.query.all()
     pitch = Pitch.query.filter_by(id = pitch_id).first()
@@ -105,7 +97,7 @@ def new_comment(pitch_id):
         db.session.add(comment)
         db.session.commit()
         flash('Your comment has been added!', 'success')
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.pitches_by_category', category_id = pitch.category_id))
 
     return render_template('add_comment.html', title=title, comment_form=form, categories=categories, pitch=pitch)
 

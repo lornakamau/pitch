@@ -40,6 +40,9 @@ a {
 h1,h2,h3,h4 {
     font-family: 'Fredoka One', cursive;
 }
+a:hover{
+    text-decoration: none;
+}
 @media (min-width: 768px){
 .navbar .btn {
     padding: 8px;
