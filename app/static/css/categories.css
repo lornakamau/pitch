@@ -1,7 +1,7 @@
 .introduction{
     margin: 2%;
 }
-.introduction p{
+.introduction, #nothing{
     padding-left: 25%;
     padding-right: 25%;
     text-align: justify;
@@ -57,8 +57,12 @@ blockquote footer:before, blockquote small:before {
     }
 }
 @media (max-width: 767px){
-    .introduction p{
+    .introduction, #nothing{
         padding-left: 10%;
         padding-right: 10%;
+    }
+    .jumbotron{
+        width: 97%;
+        margin: 3%;
     }
 }

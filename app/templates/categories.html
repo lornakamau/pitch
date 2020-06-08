@@ -10,6 +10,34 @@
     {% if category_name == "Twitter"%}
     <h4 class="text-center">What is a Twitter Pitch?</h4>
     <p class="card-text">A Twitter pitch is one that summarizes your whole idea in one punchy sentence. Your tweet pitch should explain what problem is being solved or what the solution might be. This is best for when you meet someone at an event and they have never heard of your company and is used to gauge your audience's receptiveness.</p>
+    {% if pitches %}
+    <p>Below are examples to inspire you. Vote and comment on whichever captures your attention.</p>
+    {%endif%}
+    {%elif category_name == "Elevator"%}
+    <h4 class="text-center">What is an Elevator Pitch?</h4>
+    <p class="card-text">The idea is that this pitch should last as long as an elevator ride, that is between 15 seconds and a couple of minutes. To craft a good elevator pitch, take the following things into consideration: 
+      <ul>
+        <li>Define the goal of your pitch</li>
+        <li>Explain briefly but clearly what you do</li>
+        <li>Communicate your USP - Unique Selling Point</li>
+        <li>Engage the listener with one good question</li>
+      </ul>
+    </p>
+    {% if pitches %}
+    <p>Below are examples to inspire you. Vote and comment on whichever captures your attention.</p>
+    {%endif%}
+    {%elif category_name == "Competitor"%}
+    <h4 class="text-center">What is a Competition Pitch?</h4>
+    <p class="card-text">This is longer than Elevator and Twitter pitches. It needs to be presented with a pitch deck. The deck you will be building is very similar to the one you would use to send to investors. The pressure is high and you have a limited amount of time to catch everyone’s attention. You need to make the most out of it.</p>
+    {% if pitches %}
+    <p>Below are examples to inspire you. Vote and comment on whichever captures your attention.</p>
+    {%endif%}
+    {%elif category_name == "Investor"%}
+    <h4 class="text-center">What is an Investor Pitch?</h4>
+    <p class="card-text">To present this, one would use a media deck to deliver their message.When talking with investors, make sure to spend time on the problem, solution (unique technology) and, of course, traction. This is THE pitch that you need to ready for. The people in front of you are the one that could give you money to transform your dream into reality. </p>
+    {% if pitches %}
+    <p>Below are examples to inspire you. Vote and comment on whichever captures your attention.</p>
+    {%endif%}
     {%endif%}
     </div>
 <div class="row">
@@ -39,12 +67,8 @@
             <a href="{{url_for('main.downvote', uname = current_user.id ,pitch_id = pitch.id)}}"><button class="btn my-2 my-sm-0">{{pitch.downvotes}}&nbsp;<i class="fas fa-thumbs-up"></i>&nbsp;dislike</button></a>&nbsp;&nbsp;
           </div>
         </div>
-        <!-- <h5 class="text-center" style="color: white;"><b>Comments</b></h5> -->
           {% for comment in comments %}
             {%if comment.pitch_id == pitch.id %}
-            {% if comments %}
-            <h5 class="text-center">Comments</h5>
-            {% endif %}
             <div class="card comments">
               <div class="card-body">
                 <p class="card-text">{{comment.comment_content}}</p>
@@ -57,7 +81,6 @@
           {% endfor%}
       </div>
       {% endfor%}
-      
     {%else%}
     <p id="nothing">There are no pitches in this category</p>
     <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">New Pitch</a>
