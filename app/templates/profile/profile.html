@@ -24,7 +24,7 @@
       <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit Bio</a><br><br>
       {% endif %}
       {% endif %}
-      {% if user == current_user %}
+      {% if user.bio %}
       <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit Bio</a><br><br>
       {% endif %}
       <p><b>Update Profile Picture</b></p>
