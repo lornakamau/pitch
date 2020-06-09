@@ -11,15 +11,9 @@
   <h4 class="text-center">What is a Twitter Pitch?</h4>
   <p class="card-text">A Twitter pitch is one that summarizes your whole idea in one punchy sentence. Your tweet pitch
     should explain what problem is being solved or what the solution might be. This is best for when you meet someone at
-    an event and they have never heard of your company and is used to gauge your audience's receptiveness.</p>
-  {% if pitches %}
-  <p>Below are examples to inspire you. Vote and comment on whichever captures your attention.</p>
-  {%else%}
-  <div>
-    <p><b>There are no pitches in this category</b></p>
-    <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">Add a Pitch</a>
-  </div>
-  {%endif%}
+    an event and they have never heard of your company and is used to gauge your audience's receptiveness. <a
+      href="{{url_for('main.new_pitch', uname=current_user.username)}}">Add your Pitch</a> and have other users vote
+  and comment on it.</p>
 
   {%elif category_name == "Elevator"%}
   <h4 class="text-center">What is an Elevator Pitch?</h4>
@@ -31,29 +25,16 @@
       <li>Communicate your USP - Unique Selling Point</li>
       <li>Engage the listener with one good question</li>
     </ul>
-  </p>
-  {% if pitches %}
-  <p>Below are examples to inspire you. Vote and comment on whichever captures your attention.</p>
-  {%else%}
-  <div>
-    <p><b>There are no pitches in this category</b></p>
-    <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">Add a Pitch</a>
-  </div>
-  {%endif%}
+    <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">Add your Pitch</a> and have other users
+  vote and comment on it.</p>
 
   {%elif category_name == "Competition"%}
   <h4 class="text-center">What is a Competition Pitch?</h4>
   <p class="card-text">This is longer than Elevator and Twitter pitches. It needs to be presented with a pitch deck. The
     deck you will be building is very similar to the one you would use to send to investors. The pressure is high and
-    you have a limited amount of time to catch everyone’s attention. You need to make the most out of it.</p>
-  {% if pitches %}
-  <p>Below are examples to inspire you. Vote and comment on whichever captures your attention.</p>
-  {%else%}
-  <div>
-    <p><b>There are no pitches in this category</b></p>
-    <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">Add a Pitch</a>
-  </div>
-  {%endif%}
+    you have a limited amount of time to catch everyone’s attention. You need to make the most out of it. <a
+      href="{{url_for('main.new_pitch', uname=current_user.username)}}">Add your Pitch</a> and have other users vote
+  and comment on it.</p>
 
   {%elif category_name == "Investor"%}
   <h4 class="text-center">What is an Investor Pitch?</h4>
@@ -62,15 +43,8 @@
     make sure to spend time on the problem, solution (unique technology) and, of course, traction. This is THE pitch
     that you need to get ready for the most. The people in front of you are the ones that could give you money to
     transform your dream
-    into reality. </p>
-  {% if pitches %}
-  <p>Below are examples to inspire you. Vote and comment on whichever captures your attention.</p>
-  {%else%}
-  <div>
-    <p><b>There are no pitches in this category</b></p>
-    <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">Add a Pitch</a>
-  </div>
-  {%endif%}
+    into reality. <a href="{{url_for('main.new_pitch', uname=current_user.username)}}">Add your Pitch</a> and have
+  other users vote and comment on it.</p>
 
   {%endif%}
 </div>

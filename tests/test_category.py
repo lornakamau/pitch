@@ -18,4 +18,4 @@ class CategoryModelTest(unittest.TestCase):
         db.session.add(self.new_category)
         db.session.commit()
         get_id = Category.get_category_name('category')
-        self.assertEqual(get_id, 1)
+        self.assertEqual(get_id, 7)
