@@ -31,6 +31,9 @@
                         </div>
                     </li>
                     <li><a href="{{url_for('main.new_pitch', uname=current_user.username)}}"> Add a pitch</a></li>
+                    {% if current_user.username == "Lorna"%}
+                    <li><a href="{{url_for('main.add_category')}}"> Add a category</a></li>
+                    {%endif%}
                 </ul>
             </div>
         </div>

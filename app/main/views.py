@@ -13,7 +13,7 @@ def index():
     title = 'Pitch'
     categories = Category.query.all()
     return render_template('index.html', title=title, categories=categories) 
-@main.route('/category/add-category')
+@main.route('/category/add-category', methods=['GET', 'POST'])
 def add_category():
     form = CategoryForm()
     if current_user.username != "Lorna":
