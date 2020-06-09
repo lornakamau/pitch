@@ -16,6 +16,8 @@ def index():
 @main.route('/category/add-category')
 def add_category():
     form = CategoryForm()
+    if current_user.username != "Lorna":
+        abort(404)
     if form.validate_on_submit():
         category = Category(category_name=form.category_name.data)
         db.session.add(category)
@@ -23,7 +25,7 @@ def add_category():
         return redirect(url_for('main.index'))
 
     title = "New Category | Pitch"
-    return render_template('auth/add_category.html', category_form = form, title=title)
+    return render_template('add_category.html', category_form = form, title=title)
 
 @main.route('/pitches/<category_id>')
 def pitches_by_category(category_id):
