@@ -1,7 +1,7 @@
 from flask import render_template,abort,redirect,url_for,request,flash
 from . import main
 from ..models import User, Pitch, Comment, Category
-from .forms import UpdateProfile, PitchForm, CommentForm
+from .forms import UpdateProfile, PitchForm, CommentForm, CategoryForm
 from .. import db,photos
 from flask_login import login_required, current_user
 
@@ -13,6 +13,17 @@ def index():
     title = 'Pitch'
     categories = Category.query.all()
     return render_template('index.html', title=title, categories=categories) 
+@main.route('/category/add-category')
+def add_category():
+    form = CategoryForm()
+    if form.validate_on_submit():
+        category = Category(category_name=form.category_name.data)
+        db.session.add(category)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+
+    title = "New Category | Pitch"
+    return render_template('auth/add_category.html', category_form = form, title=title)
 
 @main.route('/pitches/<category_id>')
 def pitches_by_category(category_id):
