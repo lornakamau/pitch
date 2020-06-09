@@ -12,7 +12,7 @@ def index():
     '''
     title = 'Pitch'
     categories = Category.query.all()
-    return render_template('index.html', title=title, categories=categories)
+    return render_template('index.html', title=title, categories=categories) 
 
 @main.route('/pitches/<category_id>')
 def pitches_by_category(category_id):
