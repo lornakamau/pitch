@@ -46,7 +46,7 @@ def update_profile(uname):
     categories = Category.query.all()
     if user is None:
         abort(404)
-
+    
     form = UpdateProfile()
 
     if form.validate_on_submit():

@@ -9,7 +9,7 @@ from flask_mail import Mail
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 login_manager = LoginManager()
-login_manager.session_protection = 'strong' #providessecurity levels
+login_manager.session_protection = 'strong' #provides security levels
 login_manager.login_view = 'auth.login' #login endpoint
 photos = UploadSet('photos',IMAGES)
 mail = Mail()
