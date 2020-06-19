@@ -8,6 +8,7 @@ class CategoryModelTest(unittest.TestCase):
         db.session.add(self.new_category)
         db.session.commit()
 
+    def test_instance_variables(self):
         self.assertEquals(self.new_category.category_name, "category")
 
     def tearDown(self):
@@ -18,4 +19,4 @@ class CategoryModelTest(unittest.TestCase):
         db.session.add(self.new_category)
         db.session.commit()
         get_id = Category.get_category_name('category')
-        self.assertEqual(get_id, 7)
+        self.assertEqual(get_id.id, 1)

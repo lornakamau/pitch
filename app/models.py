@@ -19,6 +19,10 @@ class User(UserMixin,db.Model): #db.Model helps connect our class to our databas
     pass_secure = db.Column(db.String(255))
     pitches = db.relationship('Pitch',backref = 'pitcher',lazy = "dynamic")
 
+    def save_user(self):
+            db.session.add(self)
+            db.session.commit()
+
     @property
     def password(self):
             raise AttributeError('You cannot read the password attribute') #raises an attribute error when we try to access the password
@@ -43,7 +47,7 @@ class Category(db.Model):
     @classmethod
     def get_category_name(cls,category_name):
         categoryName = Category.query.filter_by(category_name = category_name).first()
-        return categoryName.id
+        return categoryName
 
     def __repr__(self):
         return f'Category{self.category_name}' 
@@ -66,7 +70,7 @@ class Comment(db.Model):
             return comments
                 
     def __repr__(self):
-        return f'COMMENT {self.comment_wording}'
+        return f'COMMENT {self.comment_content}'
 
 class Pitch(db.Model):
         __tablename__ = 'pitches'

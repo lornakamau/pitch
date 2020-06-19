@@ -16,7 +16,7 @@ class UserModelTest(unittest.TestCase):
         self.assertTrue(self.new_user.pass_secure is not None)
 
     def test_password_verification(self):
-        self.assertTrue(self.new_user.verify_password('diana'))
+        self.assertTrue(self.new_user.verify_password('lorna'))
 
     def test_save_user(self):
         self.new_user.save_user()

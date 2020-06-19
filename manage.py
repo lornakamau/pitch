@@ -4,7 +4,7 @@ from app.models import User, Comment, Category, Pitch
 from  flask_migrate import Migrate, MigrateCommand
 
 # Creating app instance
-app = create_app('production')
+app = create_app('tests')
 
 manager = Manager(app)
 manager.add_command('server',Server)
